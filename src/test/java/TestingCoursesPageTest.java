@@ -23,6 +23,9 @@ public class TestingCoursesPageTest {
 
     @Test
     public void checkTestingPage() {
-        new TestingCoursesPage(driver).open();
+        ((TestingCoursesPage) new TestingCoursesPage(driver)
+                .open())
+                .checkingTheNumberOfCurses();
+
     }
 }

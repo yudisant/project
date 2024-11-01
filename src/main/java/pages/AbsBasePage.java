@@ -1,7 +1,12 @@
 package pages;
 
 import common.AbsCommon;
+import data.TestingPageLocators;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public abstract class AbsBasePage extends AbsCommon {
 
@@ -19,5 +24,9 @@ public abstract class AbsBasePage extends AbsCommon {
         driver.get(baseUrl + path);
 
         return this;
+    }
+
+    public List<WebElement> getElement(TestingPageLocators locators) {
+        return driver.findElements(By.cssSelector(locators.getLocator()));
     }
 }
