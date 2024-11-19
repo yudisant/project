@@ -1,33 +1,47 @@
 package pages;
 
-import data.TestingPageLocators;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class TestingCoursesPage extends AbsBasePage<TestingCoursesPage> {
 
+    By listOfCurses = By.cssSelector("[class='sc-18q05a6-1 bwGwUO'] a");
+    By button = By.className("sc-mrx253-0 enxKCy sc-prqxfo-0 cXVWAS");
+
     public TestingCoursesPage(WebDriver driver) {
-        super(driver, "/catalog/courses?categories=testing", new WebDriverWait(driver, Duration.ofSeconds(10)));
+        super(driver, "/catalog/courses?categories=testing");
     }
 
-    private List<WebElement> listofCurses() {
-        return getElements(TestingPageLocators.CATALOG.getLocator());
+    private List<WebElement> listOfCurses() {
+        logger.info("Получение списка типов курса");
+        return driver.findElements(listOfCurses);
     }
 
-    public TestingCoursesPage checkingTheNumberOfCurses() {
-        Assertions.assertEquals(listofCurses().size(), 10, "Количество курсов не совпадает");
+    public TestingCoursesPage clickButton() {
+        logger.info("Нажатие кнопки открыть");
+        WebElement btn = driver.findElement(button);
+        btn.click();
 
         return this;
     }
 
-    public TestingCoursesPage openingQaLead() {
-        listofCurses().getFirst().click();
+    public void checkingTheNumberOfCurses() {
+        logger.info("Сравнение колличества карточек курсов");
+        Assertions.assertEquals(listOfCurses()
+                .size(), 10, "Количество курсов не совпадает");
+    }
 
+    public TestingCoursesPage openTestingCard() {
+        logger.info("Открытие карточки курса");
+        for(WebElement element : listOfCurses()) {
+            element.click();
+            break;
+        }
         return this;
     }
+
 }

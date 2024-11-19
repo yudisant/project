@@ -14,9 +14,9 @@ public abstract class AbsCommon {
     protected WebDriverWait webDriverWait;
     protected static final Logger logger = LogManager.getLogger();
 
-    public AbsCommon(WebDriver driver, WebDriverWait webDriverWait) {
+    public AbsCommon(WebDriver driver) {
         this.driver = driver;
-        this.webDriverWait = webDriverWait;
+        this.webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         PageFactory.initElements(driver, this);
     }

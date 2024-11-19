@@ -3,7 +3,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import pages.QaLeadPage;
+import pages.TestingCardPage;
 import pages.TestingCoursesPage;
 
 public class TestingCoursesPageTest {
@@ -23,13 +23,18 @@ public class TestingCoursesPageTest {
     }
 
     @Test
-    public void checkTestingPage() throws InterruptedException {
+    public void checkTestingPage() {
+         new TestingCoursesPage(driver)
+                .open()
+                .checkingTheNumberOfCurses();
+    }
+
+    @Test
+    public void asdaf() {
         new TestingCoursesPage(driver)
                 .open()
-                .checkingTheNumberOfCurses()
-                .openingQaLead();
-        new QaLeadPage(driver).checkingData();
-        Thread.sleep(10000);
-
+                .openTestingCard();
+        new TestingCardPage(driver)
+                .openCardPage();
     }
 }
