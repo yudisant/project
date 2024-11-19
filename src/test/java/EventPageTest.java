@@ -24,7 +24,7 @@ public class EventPageTest {
     }
 
     @Test
-    public void checkDateEvent() throws ParseException {
+    public void checkDateEvent() throws ParseException, InterruptedException {
         new EventPage(driver)
                 .open()
                 .scrollPage()
@@ -32,7 +32,7 @@ public class EventPageTest {
     }
 
     @Test
-    public void checkTypeEvent() {
+    public void checkTypeEvent() throws InterruptedException {
         new EventPage(driver)
                 .open()
                 .choiceTypeEvent()

@@ -22,7 +22,7 @@ public class EventPage extends AbsBasePage<EventPage> {
         logger.info("Сравнение типа мероприятия");
         List<WebElement> cards = driver.findElements(cardsEvent);
         for(var element : cards) {
-            String typeEvent = getElement(By.className("dod_new-type__text")).getText();
+            String typeEvent = element.findElement(By.className("dod_new-type__text")).getText();
             Assertions.assertEquals(typeEvent, "Открытый вебинар");
         }
     }
@@ -32,6 +32,7 @@ public class EventPage extends AbsBasePage<EventPage> {
         List<WebElement> cards = driver.findElements(cardsEvent);
         for(WebElement card : cards) {
             String dataString = card.findElement(By.className("dod_new-event__date-text")).getText();
+//            TODO исправить
             String dataEvent = dataString + " 2024";
             Date eventDate = formatDate(dataEvent);
 
