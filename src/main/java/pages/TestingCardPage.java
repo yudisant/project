@@ -15,19 +15,16 @@ public class TestingCardPage extends TestingCoursesPage{
         super(driver);
     }
 
-    By nameCurses = By.className("sc-1og4wiw-0 sc-s2pydo-1 iLVLDh diGrSa");
-    By descriptionCurses = By.className("sc-1og4wiw-0 sc-s2pydo-3 jfNqTr dZDxRw");
+    By nameCurses = By.cssSelector("[class='sc-1og4wiw-0 sc-s2pydo-1 iLVLDh diGrSa']");
+    By descriptionCurses = By.cssSelector("[class='sc-1og4wiw-0 sc-s2pydo-3 jfNqTr dZDxRw']");
     By componentsCurses = By.cssSelector("[class='sc-3cb1l3-4 kGoYMV']");
 
-    public void openCardPage() {
+    public void comparisonTestingCard() throws InterruptedException {
         logger.info("Проверка описание страницы курса");
-//        List<WebElement> testingCard = driver.findElements(By.cssSelector("[class='sc-18q05a6-1 bwGwUO'] a"));
-        List<WebElement> webElementList = driver.findElements(componentsCurses);
-        String name = driver.findElement(nameCurses).getText();
-        String description = driver.findElement(descriptionCurses).getText();
+        List<WebElement> webElementList = getElements(componentsCurses);
+        String name = getElement(nameCurses).getText();
+        String description = getElement(descriptionCurses).getText();
 
-//        for(WebElement element : testingCard) {
-//            element.click();
         Assertions.assertEquals(name, getNameCourse());
         Assertions.assertEquals(description, getDescription());
 
@@ -36,13 +33,12 @@ public class TestingCardPage extends TestingCoursesPage{
             checkFormat();
         }
         driver.navigate().back();
-//    }
     }
 
     private String checkDuration() {
         logger.info("Получение продолжительности курса");
-        Pattern pattern = Pattern.compile("месяц");
-        List<WebElement> components = driver.findElements(componentsCurses);
+        Pattern pattern = Pattern.compile(".месяц.");
+        List<WebElement> components = getElements(componentsCurses);
         for(var el : components) {
             if(el.isEnabled()) {
                 Matcher matcher = pattern.matcher(el.getText());
@@ -56,7 +52,7 @@ public class TestingCardPage extends TestingCoursesPage{
 
     private boolean checkFormat() {
         logger.info("Сравнение формата курсов");
-        List<WebElement> components = driver.findElements(componentsCurses);
+        List<WebElement> components = getElements(componentsCurses);
         for (var el : components) {
             if(el.isEnabled()) {
                  return el.getText().equals("Онлайн");
@@ -65,13 +61,15 @@ public class TestingCardPage extends TestingCoursesPage{
         return checkFormat();
     }
 
-    private String getNameCourse() {
+    private String getNameCourse() throws InterruptedException {
         logger.info("Получение названия курса");
-        return driver.findElement(nameCurses).getText();
+        Thread.sleep(5000);
+        return getElement(nameCurses).getText();
     }
 
-    private String getDescription() {
+    private String getDescription() throws InterruptedException {
         logger.info("Получение описания курса");
-        return driver.findElement(descriptionCurses).getText();
+        Thread.sleep(5000);
+        return getElement(descriptionCurses).getText();
     }
 }

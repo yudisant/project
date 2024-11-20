@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WebDriverFactory {
 
-    private final String browser = System.getProperty("browser", "chrome");
+    private final String browser = System.getProperty("browser", "firefox");
 
     public WebDriver created() {
         WebDriver driver;

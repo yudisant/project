@@ -2,15 +2,17 @@ package pages;
 
 import common.AbsCommon;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public abstract class AbsBasePage<T> extends AbsCommon {
 
     private final String path;
     private String baseUrl = System.getProperty("base.url", "https://otus.ru");
+
+    By load = By.cssSelector("[class='dod_new-loader-wrapper js-dod_new-loader-wrapper']");
+    By dropDown = By.cssSelector("[class='dod_new-events-dropdown__input-selected']");
+    By choiceTypeEvent = By.cssSelector("[class='dod_new-events-dropdown__list-item']");
 
     public AbsBasePage(WebDriver driver,String path) {
         super(driver);
@@ -24,14 +26,15 @@ public abstract class AbsBasePage<T> extends AbsCommon {
         return (T) this;
     }
 
-    public T scrollPage() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver,  Duration.ofSeconds(3));
+    public T scrollPage() {
         var height = ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
         while(true) {
             ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
             var newHeight = ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
-            wait.wait();
             if (newHeight.equals(height)) {
+                if(!getElement(load).isEnabled()) {
+                    continue;
+                }
                 break;
             } else {
                 height = newHeight;
@@ -41,9 +44,9 @@ public abstract class AbsBasePage<T> extends AbsCommon {
     }
 
     public T choiceTypeEvent() {
-        WebElement popup = driver.findElement(By.className("dod_new-events-dropdown__input-selected"));
+        WebElement popup = getElement(dropDown);
         if(isElementReady(popup)) {
-            for(var element : driver.findElements(By.className("dod_new-events-dropdown__list-item"))) {
+            for(var element : getElements(choiceTypeEvent)) {
                 if(element.getText().equals("Открытый вебинар")) {
                     element.click();
                     break;

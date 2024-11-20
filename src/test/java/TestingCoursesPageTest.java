@@ -13,6 +13,7 @@ public class TestingCoursesPageTest {
     @BeforeEach
     public void init() {
         driver = new WebDriverFactory().created();
+        driver.manage().window().maximize();
     }
 
     @AfterEach
@@ -26,15 +27,16 @@ public class TestingCoursesPageTest {
     public void checkTestingPage() {
          new TestingCoursesPage(driver)
                 .open()
+                .clickButton()
                 .checkingTheNumberOfCurses();
     }
 
     @Test
-    public void asdaf() {
+    public void asdaf() throws InterruptedException {
         new TestingCoursesPage(driver)
                 .open()
                 .openTestingCard();
         new TestingCardPage(driver)
-                .openCardPage();
+                .comparisonTestingCard();
     }
 }
