@@ -26,10 +26,11 @@ public abstract class AbsBasePage<T> extends AbsCommon {
         return (T) this;
     }
 
-    public T scrollPage() {
+    public T scrollPage() throws InterruptedException {
         var height = ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
         while(true) {
             ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            Thread.sleep(3000);
             var newHeight = ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
             if (newHeight.equals(height)) {
                 if(!getElement(load).isEnabled()) {

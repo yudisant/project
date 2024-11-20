@@ -15,7 +15,7 @@ public class TestingCardPage extends TestingCoursesPage{
         super(driver);
     }
 
-    By nameCurses = By.cssSelector("[class='sc-1og4wiw-0 sc-s2pydo-1 iLVLDh diGrSa']");
+    By nameCurses = By.cssSelector("div [class='sc-1og4wiw-0 sc-s2pydo-1 iLVLDh diGrSa']");
     By descriptionCurses = By.cssSelector("[class='sc-1og4wiw-0 sc-s2pydo-3 jfNqTr dZDxRw']");
     By componentsCurses = By.cssSelector("[class='sc-3cb1l3-4 kGoYMV']");
 

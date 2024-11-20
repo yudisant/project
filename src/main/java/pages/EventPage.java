@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,19 +25,18 @@ public class EventPage extends AbsBasePage<EventPage> {
     public void checkTypeEvent() {
         logger.info("Сравнение типа мероприятия");
         List<WebElement> cards = getElements(cardsEvent);
-        logger.info(cards.size());
+        logger.info("Количество мероприятий: {}", cards.size());
         for(var card : cards) {
             String typeEvent = card.findElement(eventType).getText();
-            logger.info("Название: {} тип: {}", getElement(nameEvent)
-                                                        .getText(),typeEvent);
+            logger.info("Название: {} тип: {}",
+                    card.findElement(nameEvent).getText(),typeEvent);
             Assertions.assertEquals(typeEvent, "Открытый вебинар");
         }
     }
 
     public void comparisonDate() throws ParseException {
-        logger.info("Сравнение дат");
         List<WebElement> cards = getElements(cardsEvent);
-        logger.info(cards);
+        logger.info("Количество мероприятий: {}", cards.size());
         for(WebElement card : cards) {
             String dataString = card.findElement(eventDate).getText();
 //            TODO исправил
@@ -49,8 +47,8 @@ public class EventPage extends AbsBasePage<EventPage> {
             Date dateEvent = calendar.getTime();
 
             Assertions.assertTrue(dateEvent.equals(dateNow()) || dateEvent.after(dateNow()));
-            logger.info("Название мероприятия: {} дата: {}", getElement(nameEvent)
-                                                                    .getText(), dataString);
+            logger.info("Название мероприятия: {} дата: {}",
+                    card.findElement(nameEvent).getText(), dataString);
         }
     }
 
@@ -60,7 +58,6 @@ public class EventPage extends AbsBasePage<EventPage> {
     }
 
     private Date dateNow() {
-        logger.info("Получение текущей даты без времени");
         calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
