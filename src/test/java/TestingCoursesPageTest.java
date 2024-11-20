@@ -32,7 +32,7 @@ public class TestingCoursesPageTest {
     }
 
     @Test
-    public void asdaf() throws InterruptedException {
+    public void checkTestingCard() {
         new TestingCoursesPage(driver)
                 .open()
                 .openTestingCard();

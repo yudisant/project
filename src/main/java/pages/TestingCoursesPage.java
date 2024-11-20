@@ -41,7 +41,7 @@ public class TestingCoursesPage extends AbsBasePage<TestingCoursesPage> {
 
     public void openTestingCard() {
         logger.info("Открытие карточки курса");
-        listOfCurses().getFirst();
+        listOfCurses().getFirst().click();
     }
 
 }
