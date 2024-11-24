@@ -11,6 +11,7 @@ public abstract class AbsBasePage<T> extends AbsCommon {
     private String baseUrl = System.getProperty("base.url", "https://otus.ru");
 
     By load = By.cssSelector("[class='dod_new-loader-wrapper js-dod_new-loader-wrapper']");
+    By visibleLoad = By.cssSelector("[class='dod_new-loader-wrapper js-dod_new-loader-wrapper dod_new-loader-wrapper_visible']");
     By dropDown = By.cssSelector("[class='dod_new-events-dropdown__input-selected']");
     By choiceTypeEvent = By.cssSelector("[class='dod_new-events-dropdown__list-item']");
 
@@ -32,10 +33,7 @@ public abstract class AbsBasePage<T> extends AbsCommon {
             ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
             Thread.sleep(3000);
             var newHeight = ((JavascriptExecutor) driver).executeScript("return document.body.scrollHeight");
-            if (newHeight.equals(height)) {
-                if(!getElement(load).isEnabled()) {
-                    continue;
-                }
+            if(newHeight.equals(height)) {
                 break;
             } else {
                 height = newHeight;

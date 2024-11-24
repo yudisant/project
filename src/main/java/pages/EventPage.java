@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 public class EventPage extends AbsBasePage<EventPage> {
     
     public EventPage(WebDriver driver) {

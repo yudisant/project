@@ -30,7 +30,7 @@ public class TestingCardPage extends TestingCoursesPage{
         Assertions.assertEquals(description, getDescription());
         logger.info(description, getDescription());
 
-        for (WebElement component : webElementList) {
+        for(WebElement component : webElementList) {
             if(component.getText().equals(checkDuration())) {
                 Assertions.assertEquals(component.getText(), checkDuration());
                 logger.info(component.getText(), checkDuration());
@@ -54,10 +54,9 @@ public class TestingCardPage extends TestingCoursesPage{
     }
 
     private boolean checkFormat() {
-        logger.info("Сравнение формата курсов");
         List<WebElement> components = getElements(componentsCurses);
-        for (var el : components) {
-            if(el.isEnabled()) {
+        for(var el : components) {
+            if(el.getText().equals("Онлайн")) {
                  return el.getText().equals("Онлайн");
             }
         }
